@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Posts = ({ post }) => {
+const Posts = ({ posts }) => {
   return (
     <div>
-      <p>{post.body}</p>
-      <p>{post.id}</p>
-      <p>{post.title}</p>
+      {posts.slice(0, 10).map((post) => {
+        return <p key={post.id}>{post.title}</p>;
+      })}
     </div>
   );
 };

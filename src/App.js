@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import Counter from './components/Counter';
@@ -5,7 +6,8 @@ import Posts from './components/Posts';
 
 function App() {
   const [count, setCount] = useState(1);
-  const [post, setPost] = useState({});
+  const [posts, setPost] = useState([]);
+
   const inc = () => {
     setCount(count + 1);
   };
@@ -16,21 +18,18 @@ function App() {
   };
   useEffect(() => {
     const fetchPost = async () => {
-      const data = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${count}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setPost({ ...data });
+      const data = await axios
+        .get(`https://jsonplaceholder.typicode.com/posts/`)
+        .then((res) => {
+          setPost([...res.data]);
         });
     };
-
     fetchPost();
-  }, [count]);
-
+  }, []);
+  console.log(posts);
   return (
     <div className='App'>
-      <Posts post={post} />
+      <Posts posts={posts} />
       <Counter count={count} inc={inc} dec={dec} />
     </div>
   );
