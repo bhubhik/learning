@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Counter from './components/Counter';
 import Posts from './components/Posts';
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
+import About from './routes/About';
+import Blog from './routes/Blog';
 
 function App() {
   const [count, setCount] = useState(1);
@@ -28,10 +31,20 @@ function App() {
   }, []);
   console.log(posts);
   return (
-    <div className='App'>
-      <Posts posts={posts} />
-      <Counter count={count} inc={inc} dec={dec} />
-    </div>
+    <>
+      <nav>
+        <Link exact to='/'>
+          App
+        </Link>
+        <Link to='/about'>About</Link>
+        <Link to='/blog'>Blog</Link>
+      </nav>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='/blog' element={<Blog />} />
+        <Route path='/about' element={<About />} />
+      </Routes>
+    </>
   );
 }
 
