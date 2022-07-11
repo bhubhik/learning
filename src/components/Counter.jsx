@@ -3,9 +3,13 @@ import React from 'react';
 const Counter = ({ count, inc, dec }) => {
   return (
     <div>
-      <p>{count}</p>
-      <h4 onClick={inc}>+</h4>
-      <h4 onClick={dec}>-</h4>
+      <p data-testid='counter'>{count}</p>
+      <h4 data-testid='decrement' onClick={dec}>
+        -
+      </h4>
+      <h4 data-testid='increment' onClick={inc}>
+        +
+      </h4>
     </div>
   );
 };
